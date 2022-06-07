@@ -8,7 +8,9 @@ const sagaMiddleware = createSagaMiddleware();
 
 
  function* rootSaga(){
-   yield all([fork(watcherSagaAddNote), fork(watcherSagaDeleteNote),fork(watcherSagaGetNotes)]);
+    yield all([watcherSagaAddNote(),
+     watcherSagaDeleteNote(),
+     watcherSagaGetNotes()]);
 }
 
 const rootReducer = combineReducers({

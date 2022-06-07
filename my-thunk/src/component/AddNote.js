@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createNote } from "../actions/notes";
+// import { createNote } from "../actions/notes";
 import { ADD_NOTE_WATCHER } from "../redux/types";
 
 const AddNote = () => {
@@ -18,7 +18,7 @@ const AddNote = () => {
     };
 
     const saveNote = () => {
-        const { title, description } = note;
+        // const { title, description } = note;
         // dispatch(createNote(title, description))
         //     .then(data => {
         //         setNote({
@@ -32,6 +32,8 @@ const AddNote = () => {
         //         console.log(e);
         //     });
         // dispatch({type:ADD_NOTE_WATCHER});
+        console.log('before dispatching add note',note)
+        dispatch({type:ADD_NOTE_WATCHER,note})
     };
 
     const newNote = () => {

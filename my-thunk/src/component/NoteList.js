@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    deleteNote,
-    retrieveNotes
-} from "../actions/notes";
+// import {
+//     deleteNote,
+//     retrieveNotes
+// } from "../actions/notes";
 import { store } from "../redux";
 import { DELETE_NOTE_WATCHER, GET_NOTES_WATCHER } from "../redux/types";
 
@@ -42,7 +42,8 @@ const NoteList = (props) => {
         //         console.log(e);
         //     });
         console.log('hit delete')
-        dispatch({type:DELETE_NOTE_WATCHER,payload:id})
+        dispatch({type:DELETE_NOTE_WATCHER,id})
+        // dispatch({type:'h1',payload:id});
     };
 
     return (
