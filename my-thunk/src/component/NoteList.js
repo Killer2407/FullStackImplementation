@@ -1,18 +1,32 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    deleteNote,
-    retrieveNotes
-} from "../actions/notes";
+// import {
+//     deleteNote,
+//     retrieveNotes
+// } from "../actions/notes";
+import { store } from "../redux";
+import { DELETE_NOTE_WATCHER, GET_NOTES_WATCHER } from "../redux/types";
 
 const NoteList = (props) => {
     const [currentNote, setCurrentNote] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
-    const notes = useSelector(state => state.notes);
+    const notesData = useSelector(state => state.notes);
+    const [notes,setNotes] = useState(null);
+
+
+    console.log('notes from selector',notes);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(retrieveNotes());
-    });
+        console.log('hit');
+        // dispatch(retrieveNotes());
+        dispatch({type:GET_NOTES_WATCHER});
+    },[]);
+
+    useEffect(()=>{
+        // console.log('nD',notesData)
+        if(notesData)
+        setNotes(notesData?.notes);
+    },[notesData])
 
     const setActiveNote = (note, index) => {
         setCurrentNote(note);
@@ -20,13 +34,16 @@ const NoteList = (props) => {
     };
 
     const removeNote = (id) => {
-        dispatch(deleteNote(id))
-            .then(() => {
-                props.history.push("/notes");
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        // dispatch(deleteNote(id))
+        //     .then(() => {
+        //         props.history.push("/notes");
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
+        console.log('hit delete')
+        dispatch({type:DELETE_NOTE_WATCHER,id})
+        // dispatch({type:'h1',payload:id});
     };
 
     return (
@@ -38,6 +55,7 @@ const NoteList = (props) => {
             <div className="col-md-6">
                 <h4>Note List</h4>
                 <ul className="list-group">
+                {notes && console.log('notes here',notes,store.getState())}
                     {notes &&
                         notes.map((note, index) => (
                             <li

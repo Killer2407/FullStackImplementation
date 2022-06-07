@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { createNote } from "../actions/notes";
+// import { createNote } from "../actions/notes";
+import { ADD_NOTE_WATCHER } from "../redux/types";
 
 const AddNote = () => {
     const initialNoteState = {
@@ -10,29 +11,36 @@ const AddNote = () => {
     const [note, setNote] = useState(initialNoteState);
     const [submitted, setSubmitted] = useState(false);
     const dispatch = useDispatch();
+
     const handleInputChange = event => {
         const { name, value } = event.target;
         setNote({ ...note, [name]: value });
     };
+
     const saveNote = () => {
-        const { title, description } = note;
-        dispatch(createNote(title, description))
-            .then(data => {
-                setNote({
-                    title: data.title,
-                    description: data.description,
-                });
-                setSubmitted(true);
-                console.log(data);
-            })
-            .catch(e => {
-                console.log(e);
-            });
+        // const { title, description } = note;
+        // dispatch(createNote(title, description))
+        //     .then(data => {
+        //         setNote({
+        //             title: data.title,
+        //             description: data.description,
+        //         });
+        //         setSubmitted(true);
+        //         console.log(data);
+        //     })
+        //     .catch(e => {
+        //         console.log(e);
+        //     });
+        // dispatch({type:ADD_NOTE_WATCHER});
+        console.log('before dispatching add note',note)
+        dispatch({type:ADD_NOTE_WATCHER,note})
     };
+
     const newNote = () => {
         setNote(initialNoteState);
         setSubmitted(false);
     };
+
     return (
         <div className="submit-form">
             {submitted ? (
