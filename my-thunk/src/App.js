@@ -20,26 +20,18 @@ function App() {
         </a>
         <div className="navbar-nav mr-auto">
           <li className="nav-item">
-            <Link to="/add-note" className="nav-link">
+            <a href="/add-note" className="nav-link">
               Add
-            </Link>
+            </a>
           </li>
           
         </div>
       </nav>
-     
         <Switch>
-      
-          <Route exact path="/notes">
-            <NoteList />
+          <Route exact path="/notes" component={NoteList}>
           </Route>
-          <Route exact path="/add-note">
-            <AddNote />
+          <Route exact path="/add-note" component={AddNote}>
           </Route>
-          <Route exact path="/">
-            <NoteList/>
-          </Route>
-
         </Switch>
    
     </BrowserRouter>
